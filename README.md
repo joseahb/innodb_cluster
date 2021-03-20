@@ -21,7 +21,9 @@ root> rm /var/run/mysqld/ -r
 # Install mysql server and Mysql Shell
 
 root> dpkg -i mysql-apt-config-XX.deb
+
 root> apt update
+
 root> apt install mysql-community-server mysql-shell
 
 # Create user grant permissions
