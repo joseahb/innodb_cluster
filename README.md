@@ -15,7 +15,9 @@
 -> Remove existing files
 
 root> apt purge mysql*
+
 root> rm /etc/mysql/ -r
+
 root> rm /var/run/mysqld/ -r
 
 # Install mysql server and Mysql Shell
