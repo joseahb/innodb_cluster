@@ -20,11 +20,11 @@ root> rm /var/run/mysqld/ -r
 
 # Install mysql server and Mysql Shell
 
-<root># dpkg -i mysql-apt-config-XX.deb
-<root># apt update
-<root># apt install mysql-community-server mysql-shell
+root> dpkg -i mysql-apt-config-XX.deb
+root> apt update
+root> apt install mysql-community-server mysql-shell
 
--> Go to <mysql> terminal
+# Create user grant permissions
 
 mysql> set sql_log_bin=0;
 
@@ -46,9 +46,9 @@ mysql> set sql_log_bin =1;
 
 mysql> reset master;
 
--> Login to mysql Shell
+# Initialize Instances and Create Cluster
 
-<root># mysqlsh -u amdev Hostname01
+root> mysqlsh -u amdev Hostname01 // Enter into shell 
 
 mysqlshJS> dba.configureLocalInstance('amdev@Hostname01:3306);//for all hosts
 
@@ -65,24 +65,24 @@ mysqlshJS> cluster.addInstance('amdev@Hostname03:3306);
 
 mysqlshJS> cluster.status();
 
--> All instances should have joined the cluster
+// All instances should have joined the cluster
 alternatively check on mysql terminal using
-
+// Check status
 mysql> select * from performance_schema.replication_group_members;
 
 # Installing & configuring mysql router;
 
-<root># apt update & upgrade
-<root># apt install mysql-apt-config
-<root># apt install mysql-router
+root> apt update & upgrade
+root> apt install mysql-apt-config
+root> apt install mysql-router
 
 # Start mysql-router 
-<root># mysqlrouter --bootstrap amdev@Hostname01 -d myrouter --user=amdev
+root> mysqlrouter --bootstrap amdev@Hostname01 -d myrouter --user=amdev
 
 If errors occur when starting mysql router, check and add appropriate permissions in apparmor/sbin.mysqlrouter.
 
 Now consume the database through the hostname of your router;
 
-mysql -u amdev -h ROUTER_IP -P 6446 -e "select @@hostname" -p
+hostname> mysql -u amdev -h ROUTER_IP -P 6446 -e "select @@hostname" -p // From any shell or your app code
 
 
