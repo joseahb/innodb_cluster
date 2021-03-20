@@ -10,9 +10,7 @@
     192.X.X.X  hostname03
  
 
-# Install mysql Server
-
--> Remove existing files
+# Remove existing files
 
 root> apt purge mysql*
 
