@@ -10,19 +10,19 @@
     192.X.X.X  hostname03
  
 
-Install mysql Server
+# Install mysql Server
 
 -> Remove existing files
 
-# apt purge mysql*
-# rm /etc/mysql/ -r
-# rm /var/run/mysqld/ -r
+root> apt purge mysql*
+root> rm /etc/mysql/ -r
+root> rm /var/run/mysqld/ -r
 
--> Install mysql server and Mysql Shell
+# Install mysql server and Mysql Shell
 
-# dpkg -i mysql-apt-config-XX.deb
-# apt update
-# apt install mysql-community-server mysql-shell
+<root># dpkg -i mysql-apt-config-XX.deb
+<root># apt update
+<root># apt install mysql-community-server mysql-shell
 
 -> Go to <mysql> terminal
 
@@ -48,11 +48,12 @@ mysql> reset master;
 
 -> Login to mysql Shell
 
-# mysqlsh -u amdev Hostname01
+<root># mysqlsh -u amdev Hostname01
 
 mysqlshJS> dba.configureLocalInstance('amdev@Hostname01:3306);//for all hosts
-Repeat step above for all the nodes
-Create cluster
+
+-> Repeat step above for all the nodes
+-> Create cluster
 
 mysqlshJS> dba.createCluster('myCluster');
 
@@ -64,19 +65,19 @@ mysqlshJS> cluster.addInstance('amdev@Hostname03:3306);
 
 mysqlshJS> cluster.status();
 
-All instances should have joined the cluster
+-> All instances should have joined the cluster
 alternatively check on mysql terminal using
 
 mysql> select * from performance_schema.replication_group_members;
 
--> Installing & configuring mysql router;
+# Installing & configuring mysql router;
 
-# apt update & upgrade
-# apt install mysql-apt-config
-# apt install mysql-router
+<root># apt update & upgrade
+<root># apt install mysql-apt-config
+<root># apt install mysql-router
 
-Start mysql-router 
-# mysqlrouter --bootstrap amdev@Hostname01 -d myrouter --user=amdev
+# Start mysql-router 
+<root># mysqlrouter --bootstrap amdev@Hostname01 -d myrouter --user=amdev
 
 If errors occur when starting mysql router, check and add appropriate permissions in apparmor/sbin.mysqlrouter.
 
