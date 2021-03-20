@@ -54,8 +54,8 @@ root> mysqlsh -u amdev Hostname01 // Enter into shell
 
 mysqlshJS> dba.configureLocalInstance('amdev@Hostname01:3306);//for all hosts
 
--> Repeat step above for all the nodes
--> Create cluster
+// Repeat step above for all the nodes
+// Create cluster
 
 mysqlshJS> dba.createCluster('myCluster');
 
